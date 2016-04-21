@@ -435,7 +435,7 @@ static char DZNWebViewControllerKVOContext = 0;
 - (void)loadURL:(NSURL *)URL baseURL:(NSURL *)baseURL
 {
     if ([URL isFileURL]) {
-        NSData *data = [[NSData alloc] initWithContentsOfURL:URL encoding:NSUTF8StringEncoding error:nil];
+        NSData *data = [[NSData alloc] initWithContentsOfURL:URL];
         NSString *HTMLString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 
         [self.webView loadHTMLString:HTMLString baseURL:baseURL];
