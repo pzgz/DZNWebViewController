@@ -221,17 +221,17 @@ static char DZNWebViewControllerKVOContext = 0;
     }
 
     if ((self.supportedWebNavigationTools & DZNWebNavigationToolForward) > 0 || self.supportsAllNavigationTools) {
-        if (!DZN_IS_IPAD) [items addObject:flexibleSpace];
+        if (!(DZN_IS_IPAD)) [items addObject:flexibleSpace];
         [items addObject:self.forwardBarItem];
     }
 
     if ((self.supportedWebNavigationTools & DZNWebNavigationToolStopReload) > 0 || self.supportsAllNavigationTools) {
-        if (!DZN_IS_IPAD) [items addObject:flexibleSpace];
+        if (!(DZN_IS_IPAD)) [items addObject:flexibleSpace];
         [items addObject:self.stateBarItem];
     }
 
     if (self.supportedWebActions > 0) {
-        if (!DZN_IS_IPAD) [items addObject:flexibleSpace];
+        if (!(DZN_IS_IPAD)) [items addObject:flexibleSpace];
         [items addObject:self.actionBarItem];
     }
 
