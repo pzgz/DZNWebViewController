@@ -80,7 +80,7 @@ typedef NS_OPTIONS(NSUInteger, DZNsupportedWebActions) {
  @param andConfiguration Extra WKWebViewConfiguration object so that we can inject more things.
  @returns The initialized webview controller.
  */
-- (instancetype)initWithURL:(NSURL *)URL andConfiguration:(WKWebViewConfiguration *)configuration
+- (instancetype)initWithURL:(NSURL *)URL andConfiguration:(WKWebViewConfiguration *)configuration;
 
 /**
  Initializes and returns a newly created webview controller for local HTML navigation.
