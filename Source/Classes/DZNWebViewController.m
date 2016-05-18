@@ -62,8 +62,9 @@ static char DZNWebViewControllerKVOContext = 0;
 {
     NSParameterAssert(URL);
 
-    self = [self initWithConfiguration:configuration];
+    self = [super init];
     if (self) {
+        [self initWithConfiguration:configuration];
         _URL = URL;
     }
     return self;
