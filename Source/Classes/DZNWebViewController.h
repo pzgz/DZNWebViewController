@@ -67,7 +67,7 @@ typedef NS_OPTIONS(NSUInteger, DZNsupportedWebActions) {
 
 /**
  Initializes and returns a newly created webview controller with an initial HTTP URL to be requested as soon as the view appears.
- 
+
  @param URL The HTTP URL to be requested.
  @returns The initialized webview controller.
  */
@@ -75,7 +75,7 @@ typedef NS_OPTIONS(NSUInteger, DZNsupportedWebActions) {
 
 /**
  Initializes and returns a newly created webview controller for local HTML navigation.
- 
+
  @param URL The file URL of the main html.
  @returns The initialized webview controller.
  */
@@ -83,7 +83,7 @@ typedef NS_OPTIONS(NSUInteger, DZNsupportedWebActions) {
 
 /**
  Starts loading a new request. Useful to programatically update the web content.
- 
+
  @param URL The HTTP or file URL to be requested.
  */
 - (void)loadURL:(NSURL *)URL NS_REQUIRES_SUPER;
@@ -92,9 +92,26 @@ typedef NS_OPTIONS(NSUInteger, DZNsupportedWebActions) {
  Starts loading a new request. Useful to programatically update the web content.
 
  @param URL The HTTP or file URL to be requested.
+ @param configuration Extra WKWebViewConfiguration object so that we can inject more things.
+ */
+- (void)loadURL:(NSURL *)URL withConfiguration:(WKWebViewConfiguration *)configuration;
+
+/**
+ Starts loading a new request. Useful to programatically update the web content.
+
+ @param URL The HTTP or file URL to be requested.
  @param baseURL A URL that is used to resolve relative URLs within the document.
  */
 - (void)loadURL:(NSURL *)URL baseURL:(NSURL *)baseURL;
+
+/**
+ Starts loading a new request. Useful to programatically update the web content.
+
+ @param URL The HTTP or file URL to be requested.
+ @param baseURL A URL that is used to resolve relative URLs within the document.
+ @param configuration Extra WKWebViewConfiguration object so that we can inject more things.
+ */
+- (void)loadURL:(NSURL *)URL baseURL:(NSURL *)baseURL withConfiguration:(WKWebViewConfiguration *)configuration;
 
 ///------------------------------------------------
 /// @name Appearance customisation

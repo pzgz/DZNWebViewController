@@ -432,8 +432,19 @@ static char DZNWebViewControllerKVOContext = 0;
     [self loadURL:URL baseURL:baseURL];
 }
 
-- (void)loadURL:(NSURL *)URL baseURL:(NSURL *)baseURL
-{
+- (void)loadURL:(NSURL *)URL withConfiguration:(WKWebViewConfiguration *)configuration {
+    [self loadURL:URL baseURL:URL withConfiguration:configuration];
+}
+
+- (void)loadURL:(NSURL *)URL baseURL:(NSURL *)baseURL {
+    [self loadURL:URL baseURL:baseURL withConfiguration:nil];
+}
+
+- (void)loadURL:(NSURL *)URL baseURL:(NSURL *)baseURL withConfiguration:(WKWebViewConfiguration *)configuration {
+    if (configuration != nil) {
+        self.webView.configuration = configuration;
+    }
+
     if ([URL isFileURL]) {
         NSData *data = [[NSData alloc] initWithContentsOfURL:URL];
         NSString *HTMLString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -445,6 +456,7 @@ static char DZNWebViewControllerKVOContext = 0;
         [self.webView loadRequest:request];
     }
 }
+
 
 - (void)goBackward:(id)sender
 {
@@ -701,7 +713,6 @@ static char DZNWebViewControllerKVOContext = 0;
 
     return nil;
 }
-
 
 #pragma mark - UITableViewDataSource Methods
 
