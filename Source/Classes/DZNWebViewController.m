@@ -81,7 +81,7 @@ static char DZNWebViewControllerKVOContext = 0;
 
 - (void)commonInit
 {
-    (WKWebViewConfiguration *)configuration = [WKWebViewConfiguration new];
+    WKWebViewConfiguration *configuration = [WKWebViewConfiguration new];
     [self initWithConfiguration:configuration];
 }
 
