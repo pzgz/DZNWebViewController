@@ -58,6 +58,17 @@ static char DZNWebViewControllerKVOContext = 0;
     return self;
 }
 
+- (instancetype)initWithURL:(NSURL *)URL andConfiguration:(WKWebViewConfiguration *)configuration
+{
+    NSParameterAssert(URL);
+
+    self = [self initWithConfiguration:configuration];
+    if (self) {
+        _URL = URL;
+    }
+    return self;
+}
+
 - (instancetype)initWithFileURL:(NSURL *)URL
 {
     return [self initWithURL:URL];
@@ -70,6 +81,12 @@ static char DZNWebViewControllerKVOContext = 0;
 
 - (void)commonInit
 {
+    (WKWebViewConfiguration *)configuration = [WKWebViewConfiguration new];
+    [self initWithConfiguration:configuration];
+}
+
+- (void)initWithConfiguration:(WKWebViewConfiguration *)configuration
+{
     self.supportedWebNavigationTools = DZNWebNavigationToolAll;
     self.supportedWebActions = DZNWebActionAll;
     self.showLoadingProgress = YES;
@@ -77,7 +94,7 @@ static char DZNWebViewControllerKVOContext = 0;
     self.allowHistory = YES;
     self.showPageTitleAndURL = YES;
 
-    self.webView = [[DZNWebView alloc] initWithFrame:self.view.bounds configuration:[WKWebViewConfiguration new]];
+    self.webView = [[DZNWebView alloc] initWithFrame:self.view.bounds configuration:configuration];
     self.webView.backgroundColor = [UIColor whiteColor];
     self.webView.allowsBackForwardNavigationGestures = YES;
     self.webView.UIDelegate = self;
@@ -432,19 +449,8 @@ static char DZNWebViewControllerKVOContext = 0;
     [self loadURL:URL baseURL:baseURL];
 }
 
-- (void)loadURL:(NSURL *)URL withConfiguration:(WKWebViewConfiguration *)configuration {
-    [self loadURL:URL baseURL:URL withConfiguration:configuration];
-}
-
-- (void)loadURL:(NSURL *)URL baseURL:(NSURL *)baseURL {
-    [self loadURL:URL baseURL:baseURL withConfiguration:nil];
-}
-
-- (void)loadURL:(NSURL *)URL baseURL:(NSURL *)baseURL withConfiguration:(WKWebViewConfiguration *)configuration {
-    if (configuration != nil) {
-        self.webView.configuration = configuration;
-    }
-
+- (void)loadURL:(NSURL *)URL baseURL:(NSURL *)baseURL
+{
     if ([URL isFileURL]) {
         NSData *data = [[NSData alloc] initWithContentsOfURL:URL];
         NSString *HTMLString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -456,7 +462,6 @@ static char DZNWebViewControllerKVOContext = 0;
         [self.webView loadRequest:request];
     }
 }
-
 
 - (void)goBackward:(id)sender
 {
